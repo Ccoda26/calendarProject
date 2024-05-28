@@ -10,7 +10,7 @@ export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
   },
-  data() {
+    data() {
     return {
       calendarOptions: {
         plugins: [ timeGridPlugin, interactionPlugin ],
@@ -26,10 +26,12 @@ export default {
         slotMinTime: '08:00:00',
         slotMaxTime: '20:00:00',
         eventClick: this.handleEventClick,
-        weekends: false, // initial value
+        eventDrop: this.handleEventDrop,
+        eventResize: this.handleEventDrop,
+        weekends: false,
         locale: frLocale,
-        eventColor: '#a7bcb9',
-        eventTextColor: '#e0ebeb',
+        eventColor: '#FFFAFA',
+        eventTextColor: '#536878',
         height: 'auto',
         handleWindowResize: true,
         dayMaxEventRows: true,
@@ -60,17 +62,36 @@ export default {
             arg.event.setProp('end', eventEnd);
 
             const eventData = {
-                title : arg.event.title,
-                startDate: moment(eventStart).format('YYYY-MM-DD HH:mm:ss'),
-                endDate: moment(eventEnd).format('YYYY-MM-DD HH:mm:ss')
+                id:  arg.event.id,
+                title: arg.event.title,
+                start: moment(eventStart).format('YYYY-MM-DD HH:mm:ss'),
+                end: moment(eventEnd).format('YYYY-MM-DD HH:mm:ss')
             };
 
             try {
+              console.log(eventData)
                 Calendarservice.updateEvent(eventData);
             } catch (error) {
                 console.error("Erreur lors de la modification", error);
             }
         }
+    },
+    handleEventDrop(info) {
+      console.log(info)
+        const eventId =  info.event.id;
+        const eventTitle =  info.event.title;
+        const newStart = info.event.start; // Nouvelle date de début
+        const newEnd =  info.event.end;
+      // Gérer le déplacement de l'événement
+      const updatedEvent = {
+        id: eventId,
+        title: eventTitle,
+        start: moment(newStart).format('YYYY-MM-DD HH:mm:ss'), // Utilisez toISOString() pour obtenir le format ISO 8601
+        end: moment(newEnd).format('YYYY-MM-DD HH:mm:ss'),
+      };
+
+      // Envoyer les informations mises à jour au backend pour sauvegarde
+      Calendarservice.updateEvent(updatedEvent);
     }
   },
   created() {
@@ -79,8 +100,10 @@ export default {
 }
 </script>
 <template>
+  
     <div>
         <button @click="toggleWeekends">Avec les Weekends</button>
+        <router-link to="/addEvent" class="btn">ajouter un Event</router-link>
         <FullCalendar :options="calendarOptions" />
     </div>
 </template>

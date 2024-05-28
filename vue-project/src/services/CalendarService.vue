@@ -14,6 +14,7 @@ export default {
     },
     async updateEvent(eventData) {
         try {
+            console.log(eventData)
             await axios.post('http://localhost/customCalendar/public/api/calendar/update',eventData)
         }catch(error) {
             throw error;
