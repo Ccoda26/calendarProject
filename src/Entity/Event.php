@@ -23,6 +23,9 @@ class Event
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $EventEnd = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Event')]
+    private ?Company $company = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Event
     public function setEventEnd(\DateTimeInterface $EventEnd): static
     {
         $this->EventEnd = $EventEnd;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
 
         return $this;
     }

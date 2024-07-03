@@ -20,6 +20,35 @@ body{
   bottom: 0;*/
   width: 100%;
 }
+nav.naviguation_principale
+{
+  width: 90%;
+  margin: 10px auto;
+  background-color: #1c4362;
+  padding: 15px 10px;
+  border-radius: 10px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+.button-inscription {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.button-inscription:hover {
+  background-color: #24527a; /* Couleur légèrement plus foncée au survol */
+}
 
 .link{
   color: red;

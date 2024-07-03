@@ -20,5 +20,17 @@ import FooterView from './components/base/FooterView.vue'
 </template>
 
 <style scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
+}
 </style>

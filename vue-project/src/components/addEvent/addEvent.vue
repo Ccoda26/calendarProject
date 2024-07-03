@@ -41,16 +41,19 @@
         <div class="card-body">
           <form @submit.prevent="submitEvent">
             <div class="form-group">
-              <label for="eventName">Nom de l'événement :</label>
-              <input type="text" id="eventName" class="form-control" v-model="eventName">
+              <label for="eventName">Nom de l'événement :
+                <input type="text" id="eventName" class="form-control" v-model="eventName">
+              </label>
             </div>
             <div class="form-group">
-              <label for="eventStart">Date de début :</label>
-              <input type="datetime-local" id="eventStart" class="form-control" v-model="eventStart">
+              <label for="eventStart">Date de début :
+                <input type="datetime-local" id="eventStart" class="form-control" v-model="eventStart">
+              </label>
             </div>
             <div class="form-group">
-              <label for="eventEnd">Date de fin :</label>
-              <input type="datetime-local" id="eventEnd" class="form-control" v-model="eventEnd">
+              <label for="eventEnd">Date de fin :
+                <input type="datetime-local" id="eventEnd" class="form-control" v-model="eventEnd">
+              </label>
             </div>
             <button type="submit" class="btn btn-primary">Ajouter l'événement</button>
           </form>
